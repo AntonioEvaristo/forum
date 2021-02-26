@@ -1,6 +1,6 @@
 package br.com.acebarbosa.forum.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -8,7 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Topico {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +28,10 @@ public class Topico {
     @OneToMany(mappedBy = "topico")
     private List<Resposta> respostas = new ArrayList<>();
 
-
+    public Topico(String titulo, String mensagem, Curso curso) {
+        this.titulo = titulo;
+        this.mensagem = mensagem;
+        this.curso = curso;
+    }
 
 }
